@@ -58,7 +58,8 @@ export const Search = () => {
             onClick={handleSearch}
             variant="primary"
             data-testid="search-button"
-            className="w-[116px] pr-8 "
+            className="w-[116px] pr-8"
+            disabled={!query}
           >
             Search
           </Button>

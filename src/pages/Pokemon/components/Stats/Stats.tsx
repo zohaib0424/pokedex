@@ -1,26 +1,21 @@
 import React from "react";
 import { STAT_ABBREVIATIONS, MAX_STAT_VALUE } from "./Stats.constants";
+import { StatsProps } from "./Stats.type";
 
-interface Stat {
-  name: string;
-  value: number;
-}
+const getStatAbbreviation = (statName: string): string =>
+  STAT_ABBREVIATIONS[statName] || statName.toUpperCase();
 
-interface StatsProps {
-  stats: Stat[];
-  color: string;
-}
+const getStatPercentage = (value: number): number =>
+  Math.min((value / MAX_STAT_VALUE) * 100, 100);
 
 export const Stats: React.FC<StatsProps> = ({ stats, color }) => {
-  const getStatAbbreviation = (statName: string): string =>
-    STAT_ABBREVIATIONS[statName] || statName.toUpperCase();
-  const getStatPercentage = (value: number): number =>
-    Math.min((value / MAX_STAT_VALUE) * 100, 100);
-
   return (
     <div className="flex flex-col gap-3 sm:gap-3.5 w-full px-2 sm:px-0">
       {stats.map((stat) => (
-        <div key={stat.name} className="flex items-center gap-2 sm:gap-3 md:gap-4 w-full">
+        <div
+          key={stat.name}
+          className="flex items-center gap-2 sm:gap-3 md:gap-4 w-full"
+        >
           <span
             className="text-[10px] sm:text-xs font-bold min-w-[35px] sm:min-w-[45px] text-left uppercase tracking-wide"
             style={{ color: color }}
@@ -44,4 +39,3 @@ export const Stats: React.FC<StatsProps> = ({ stats, color }) => {
     </div>
   );
 };
-
