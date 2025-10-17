@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { PokemonTypeName } from "../../../types";
+import { PokemonTypeName } from "../../../types/pokemon";
 
 export type TabType = 'STATS' | 'EVOLUTIONS' | 'MOVES';
 

@@ -1,4 +1,4 @@
-import { MIN_POKEMON_ID, MAX_POKEMON_ID } from "./SearchPage.constants";
+import { MIN_POKEMON_ID, MAX_POKEMON_ID } from "./Search.constants";
 
 export const generateRandomPokemonId = (
   min: number = MIN_POKEMON_ID,
@@ -10,3 +10,4 @@ export const normalizeSearchQuery = (query: string): string =>
 
 export const isValidSearchQuery = (query: string): boolean =>
   normalizeSearchQuery(query).length > 0;
+

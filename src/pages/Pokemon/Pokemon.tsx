@@ -1,13 +1,16 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
-import { getPokemonDetails, firstTypeColor } from "@/services";
-import type { PokemonTypeName } from "@/types";
+import { getPokemonDetails, firstTypeColor } from "@/services/pokeapi";
+import type { PokemonTypeName } from "@/types/pokemon";
 import { PokedexCard } from "components/feature/PokedexCard";
 import type { TabType } from "components/feature/PokedexCard/PokedexCard.type";
-import { StatsDisplay } from "./components/StatsDisplay";
+import { Stats } from "./components/Stats";
+import { Evolutions } from "./components/Evolutions";
+import { Moves } from "./components/Moves";
+import { PokemonNotFound } from "../PokemonNotFound";
 
-export function PokemonPage() {
+export function Pokemon() {
   const { idOrName = "" } = useParams();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<TabType>("STATS");
@@ -24,28 +27,24 @@ export function PokemonPage() {
 
     switch (activeTab) {
       case "STATS":
-        return <StatsDisplay stats={data.stats} color={bg} />;
+        return <Stats stats={data.stats} color={bg} />;
       case "EVOLUTIONS":
-        return (
-          <div className="text-center text-gray-600">
-            Evolutions coming soon...
-          </div>
-        );
+        return <Evolutions evolutions={data.evolutions || []} color={bg} />;
       case "MOVES":
-        return (
-          <div className="text-center text-gray-600">Moves coming soon...</div>
-        );
+        return <Moves moves={data.moves || []} color={bg} />;
       default:
-        return <StatsDisplay stats={data.stats} color={bg} />;
+        return <div>No tab selected</div>;
     }
   }, [activeTab, data]);
 
+  const handleBackClick = () => navigate(-1);
+
   if (isLoading) return <div className="p-6">Loading…</div>;
-  if (isError || !data) return <div className="p-6">Pokemon not found</div>;
+  if (isError || !data)
+    return <PokemonNotFound onBackClick={handleBackClick} />;
 
   const bg = firstTypeColor(data?.types[0] as PokemonTypeName);
 
-  const handleBackClick = () => navigate(-1);
   const handleTabChange = (tab: TabType) => setActiveTab(tab);
 
   return (

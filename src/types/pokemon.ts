@@ -18,6 +18,14 @@ export interface PokemonAPI {
     };
   };
   stats: { base_stat: number; stat: NamedAPIResource }[];
+  moves: {
+    move: NamedAPIResource;
+    version_group_details: {
+      level_learned_at: number;
+      move_learn_method: NamedAPIResource;
+      version_group: NamedAPIResource;
+    }[];
+  }[];
 }
 
 export interface PokemonSpeciesAPI {
@@ -43,7 +51,8 @@ export interface PokemonDetails {
   imageUrl: string | null;
   description?: string;
   stats: { name: string; value: number }[];
-  evolutions?: string[]; // array of pokemon names in chain order
+  evolutions?: string[];
+  moves?: { name: string; level: number }[];
 }
 
 

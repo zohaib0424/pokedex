@@ -14,7 +14,7 @@ export const Input = ({
   return (
     <div className="flex flex-col relative w-full gap-2">
       {label && (
-        <span className="text-[#767676] text-base font-bold pointer-events-none whitespace-nowrap">
+        <span className="text-[#767676] text-sm sm:text-base font-bold pointer-events-none whitespace-nowrap">
           {label}
         </span>
       )}
@@ -25,7 +25,7 @@ export const Input = ({
         placeholder={placeholder}
         onKeyDown={onKeyDown}
         className={clsx(
-          "w-full rounded-lg border border-gray-300 px-4 outline-none text-base transition-all duration-200 ease-in-out bg-white box-border text-black focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.1)] placeholder:text-gray-400",
+          "w-full rounded-lg border border-gray-300 px-3 sm:px-4 outline-none text-sm sm:text-base transition-all duration-200 ease-in-out bg-white box-border text-black focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.1)] placeholder:text-gray-400",
           className
         )}
         style={{ height: height ? `${height}px` : "48px" }}

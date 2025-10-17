@@ -1,5 +1,5 @@
-import { PokemonAPI, PokemonDetails, PokemonSpeciesAPI, EvolutionChainAPI, PokemonTypeName } from '../types'
 import { getPokemonTypeColor } from '@/constants'
+import { PokemonAPI, PokemonDetails, PokemonSpeciesAPI, EvolutionChainAPI, PokemonTypeName } from '../types/pokemon'
 
 const BASE_URL = import.meta.env.VITE_POKEMON_API_BASE_URL || 'https://pokeapi.co/api/v2'
 
@@ -43,7 +43,18 @@ export async function getPokemonDetails(idOrName: string | number): Promise<Poke
   }
   traverse(evoChain.chain)
 
-  return { id, name: p.name, types, imageUrl, description, stats, evolutions }
+  const moves = p.moves
+    .flatMap(m => 
+      m.version_group_details
+        .filter(vg => vg.move_learn_method.name === 'level-up')
+        .map(vg => ({
+          name: m.move.name,
+          level: vg.level_learned_at
+        }))
+    )
+    .sort((a, b) => a.level - b.level || a.name.localeCompare(b.name))
+
+  return { id, name: p.name, types, imageUrl, description, stats, evolutions, moves }
 }
 
 

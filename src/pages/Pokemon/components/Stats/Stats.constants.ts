@@ -8,3 +8,4 @@ export const STAT_ABBREVIATIONS: Record<string, string> = {
 }
 
 export const MAX_STAT_VALUE = 200
+

@@ -1,2 +1,26 @@
-export { POKEMON_TYPE_COLORS, getPokemonTypeColor } from './pokemon.constants'
+import { PokemonTypeName } from "../types/pokemon";
 
+export const POKEMON_TYPE_COLORS: Record<PokemonTypeName, string> = {
+  normal: "#A8A77A",
+  fire: "#EE8130",
+  water: "#6390F0",
+  electric: "#F7D02C",
+  grass: "#7AC74C",
+  ice: "#96D9D6",
+  fighting: "#C22E28",
+  poison: "#A33EA1",
+  ground: "#E2BF65",
+  flying: "#A98FF3",
+  psychic: "#F95587",
+  bug: "#A6B91A",
+  rock: "#B6A136",
+  ghost: "#735797",
+  dragon: "#6F35FC",
+  dark: "#705746",
+  street: "#B7B7CE",
+  fairy: "#D685AD",
+};
+
+export function getPokemonTypeColor(type: PokemonTypeName): string {
+  return POKEMON_TYPE_COLORS[type] || POKEMON_TYPE_COLORS.normal;
+}

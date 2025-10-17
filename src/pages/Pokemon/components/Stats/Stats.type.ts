@@ -3,7 +3,8 @@ export interface Stat {
   value: number;
 }
 
-export interface StatsDisplayProps {
+export interface StatsProps {
   stats: Stat[];
   color: string;
 }
+

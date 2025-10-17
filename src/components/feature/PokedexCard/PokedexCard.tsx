@@ -1,9 +1,8 @@
 import React from "react";
 import { PokedexCardProps } from "./PokedexCard.type";
-import { BackIcon } from "@/assets";
 import { TypeBadge } from "components/common/TypeBadge";
-import { Button } from "components/common/Button";
 import { Tabs } from "components/common/Tabs";
+import { Header } from "components/feature/Header";
 
 export const PokedexCard: React.FC<PokedexCardProps> = ({
   pokemonName,
@@ -19,21 +18,7 @@ export const PokedexCard: React.FC<PokedexCardProps> = ({
   children,
 }) => {
   return (
-    <div
-      className="min-h-screen relative flex flex-col overflow-hidden"
-      style={{ background: backgroundColor }}
-    >
-      {onBackClick && (
-        <Button
-          variant="icon"
-          onClick={onBackClick}
-          aria-label="Go back"
-          className="absolute top-4 left-4 sm:top-8 sm:left-8 md:top-12 md:left-16 lg:top-15 lg:left-30 z-10"
-        >
-          <BackIcon className="transition-opacity duration-200" />
-        </Button>
-      )}
-
+    <Header backgroundColor={backgroundColor} onBackClick={onBackClick} className={className}>
       <div className="bg-white rounded-t-3xl flex-1 px-4 py-6 mt-[180px] mx-4 sm:px-6 sm:py-8 sm:mt-[200px] sm:mx-8 md:mt-[220px] md:mx-16 lg:mt-[250px] lg:ml-[150px] lg:mr-[150px] relative z-[3] min-h-[60vh] flex flex-col">
         <div className="flex justify-center items-center">
           {pokemonImageUrl && (
@@ -78,6 +63,6 @@ export const PokedexCard: React.FC<PokedexCardProps> = ({
           </div>
         </div>
       </div>
-    </div>
+    </Header>
   );
 };

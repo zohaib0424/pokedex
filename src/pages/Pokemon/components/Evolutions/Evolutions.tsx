@@ -1,0 +1,118 @@
+import React, { useEffect, useState } from "react";
+import { getPokemon } from "@/services/pokeapi";
+import type {
+  Evolution,
+  EvolutionsProps,
+} from "./Evolutions.type";
+
+export const Evolutions: React.FC<EvolutionsProps> = ({
+  evolutions,
+  color,
+}) => {
+  console.log('here are the evolutions',{evolutions});
+  
+  const [evolutionData, setEvolutionData] = useState<Evolution[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEvolutionData = async () => {
+      try {
+        setLoading(true);
+        const data = await Promise.all(
+          evolutions.map(async (name) => {
+            const pokemon = await getPokemon(name);
+            return {
+              name: pokemon.name,
+              imageUrl:
+                pokemon.sprites.other?.["official-artwork"]?.front_default ??
+                null,
+              id: pokemon.id,
+            };
+          })
+        );
+        setEvolutionData(data);
+      } catch (error) {
+        console.error("Error fetching evolution data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (evolutions.length > 0) {
+      fetchEvolutionData();
+    }
+  }, [evolutions]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <div className="text-gray-600">Loading evolutions...</div>
+      </div>
+    );
+  }
+
+  if (evolutionData.length === 0) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <div className="text-gray-600">No evolutions available</div>
+      </div>
+    );
+  }
+
+  if (evolutionData.length === 1) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <div className="text-gray-600">This Pokémon does not evolve</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col items-center gap-4 sm:gap-6 w-full py-2 sm:py-4 px-2">
+      <div className="flex items-center justify-center gap-2 sm:gap-4 flex-wrap">
+        {evolutionData.map((evolution, index) => (
+          <React.Fragment key={evolution.id}>
+            <div className="flex flex-col items-center gap-2 sm:gap-3">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center">
+                {evolution.imageUrl ? (
+                  <img
+                    src={evolution.imageUrl}
+                    alt={evolution.name}
+                    className="w-full h-full object-contain drop-shadow-md"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gray-200 rounded-full flex items-center justify-center">
+                    <span className="text-gray-400 text-[10px] sm:text-xs">No Image</span>
+                  </div>
+                )}
+              </div>
+              <span className="text-sm sm:text-base md:text-lg font-semibold text-gray-800 capitalize">
+                {evolution.name}
+              </span>
+            </div>
+
+            {index < evolutionData.length - 1 && (
+              <div className="flex items-center justify-center">
+                <svg
+                  className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10 20H30M30 20L24 14M30 20L24 26"
+                    stroke={color}
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            )}
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
+  );
+};
+

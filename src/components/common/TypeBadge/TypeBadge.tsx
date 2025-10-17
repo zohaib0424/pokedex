@@ -1,5 +1,5 @@
 import React from 'react';
-import { PokemonTypeName } from '@/types';
+import { PokemonTypeName } from '@/types/pokemon';
 import { getPokemonTypeColor } from '@/constants';
 
 interface TypeBadgeProps {

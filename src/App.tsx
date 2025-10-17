@@ -1,16 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SearchPage } from "pages/SearchPage/SearchPage";
-import { PokemonPage } from "pages/PokemonPage/PokemonPage";
-import { NotFoundPage } from "pages/NotFoundPage/NotFoundPage";
+import { Search } from "pages/Search";
+import { Pokemon } from "pages/Pokemon";
+import { Error404 } from "pages/Error404";
 import "./App.css";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SearchPage />} />
-        <Route path="/pokemon/:idOrName" element={<PokemonPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/" element={<Search />} />
+        <Route path="/pokemon/:idOrName" element={<Pokemon />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>
   );
