@@ -1,17 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PokemonIcon } from "@/assets/SvgComponents";
-import { SearchProps } from "./Search.type";
 import {
   generateRandomPokemonId,
   normalizeSearchQuery,
   isValidSearchQuery,
 } from "./Search.utils";
-import pokemonBg from "@/assets/pokemonBg.png";
+import pokemonBg from "@/assets/PokemonBg.png";
 import { Input } from "components/common/Input";
 import { Button } from "components/common/Button";
 
-export const Search = ({}: SearchProps) => {
+export const Search = () => {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
 
@@ -34,7 +33,10 @@ export const Search = ({}: SearchProps) => {
   return (
     <div
       className="relative overflow-hidden flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat [&_*]:!font-[Roboto,sans-serif] px-4 sm:px-6"
-      style={{ backgroundImage: `url(${pokemonBg})`, fontFamily: 'Roboto, sans-serif' }}
+      style={{
+        backgroundImage: `url(${pokemonBg})`,
+        fontFamily: "Roboto, sans-serif",
+      }}
     >
       <div className="w-full max-w-[427px] bg-white p-6 sm:p-8 flex flex-col items-center justify-between z-10 relative border-2 border-pokemon-gray rounded-2xl gap-4 sm:gap-6">
         <div className="flex items-center justify-center w-full">
@@ -51,12 +53,12 @@ export const Search = ({}: SearchProps) => {
             height={60}
           />
         </div>
-        <div className="flex flex-col sm:flex-row gap-2 w-full justify-center items-center">
+        <div className="flex flex-row gap-16 w-full justify-center items-center">
           <Button
             onClick={handleSearch}
             variant="primary"
             data-testid="search-button"
-            className="w-full sm:w-[116px]"
+            className="w-[116px] pr-8 "
           >
             Search
           </Button>
@@ -64,7 +66,7 @@ export const Search = ({}: SearchProps) => {
             onClick={handleRandom}
             variant="primary"
             data-testid="random-button"
-            className="w-full sm:w-[116px]"
+            className="w-[116px] pr-8 "
           >
             Random
           </Button>
@@ -73,4 +75,3 @@ export const Search = ({}: SearchProps) => {
     </div>
   );
 };
-

@@ -6,7 +6,7 @@ import { Header } from "components/feature/Header";
 
 export const PokedexCard: React.FC<PokedexCardProps> = ({
   pokemonName,
-  pokemonId,
+  pokemonId: _pokemonId,
   pokemonImageUrl,
   pokemonTypes,
   pokemonDescription,

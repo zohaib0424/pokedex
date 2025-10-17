@@ -17,7 +17,7 @@ export function Pokemon() {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["pokemon", idOrName],
-    queryFn: () => getPokemonDetails(idOrName!),
+    queryFn: () => getPokemonDetails(idOrName),
   });
 
   const renderTabContent = useCallback(() => {
@@ -39,13 +39,13 @@ export function Pokemon() {
 
   const handleBackClick = () => navigate(-1);
 
+  const handleTabChange = (tab: TabType) => setActiveTab(tab);
+
   if (isLoading) return <div className="p-6">Loading…</div>;
   if (isError || !data)
     return <PokemonNotFound onBackClick={handleBackClick} />;
 
-  const bg = firstTypeColor(data?.types[0] as PokemonTypeName);
-
-  const handleTabChange = (tab: TabType) => setActiveTab(tab);
+  const bg = firstTypeColor(data.types[0] as PokemonTypeName);
 
   return (
     <PokedexCard

@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getPokemon } from "@/services/pokeapi";
-import type {
-  Evolution,
-  EvolutionsProps,
-} from "./Evolutions.type";
+import type { Evolution, EvolutionsProps } from "./Evolutions.type";
 
 export const Evolutions: React.FC<EvolutionsProps> = ({
   evolutions,
   color,
 }) => {
-  console.log('here are the evolutions',{evolutions});
-  
   const [evolutionData, setEvolutionData] = useState<Evolution[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -82,7 +77,9 @@ export const Evolutions: React.FC<EvolutionsProps> = ({
                   />
                 ) : (
                   <div className="w-full h-full bg-gray-200 rounded-full flex items-center justify-center">
-                    <span className="text-gray-400 text-[10px] sm:text-xs">No Image</span>
+                    <span className="text-gray-400 text-[10px] sm:text-xs">
+                      No Image
+                    </span>
                   </div>
                 )}
               </div>
@@ -115,4 +112,3 @@ export const Evolutions: React.FC<EvolutionsProps> = ({
     </div>
   );
 };
-

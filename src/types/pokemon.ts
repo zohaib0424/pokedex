@@ -3,7 +3,7 @@ export type PokemonTypeName =
   | 'fighting' | 'poison' | 'ground' | 'flying' | 'psychic'
   | 'bug' | 'rock' | 'ghost' | 'dragon' | 'dark' | 'street' | 'fairy';
 
-export interface NamedAPIResource<T = unknown> {
+export interface NamedAPIResource {
   name: string;
   url: string;
 }
@@ -11,7 +11,7 @@ export interface NamedAPIResource<T = unknown> {
 export interface PokemonAPI {
   id: number;
   name: string;
-  types: { slot: number; type: NamedAPIResource<{ name: PokemonTypeName }> }[];
+  types: { slot: number; type: NamedAPIResource }[];
   sprites: {
     other?: {
       ['official-artwork']?: { front_default?: string | null };
