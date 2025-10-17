@@ -32,7 +32,7 @@ export const BackButton = styled.button`
   }
 `;
 
-export const IconContainer = styled.div`
+export const PokemonIconContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,4 +67,65 @@ export const CardContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+`;
+
+export const PokemonName = styled.h1`
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  text-align: center;
+  color: #374151;
+  text-transform: capitalize;
+`;
+
+export const TypeBadgesContainer = styled.div`
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 12px;
+`;
+
+export const Description = styled.p`
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #6B7280;
+  padding: 0 8px;
+`;
+
+export const TabsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+`;
+
+export const Tab = styled.span<{ $isActive: boolean; $color: string }>`
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  ${({ $isActive, $color }) => $isActive 
+    ? `
+      background-color: ${$color};
+      color: white;
+    ` 
+    : `
+      color: ${$color};
+      background-color: transparent;
+    `
+  }
+  
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+export const ContentSection = styled.div`
+  min-height: 200px;
+  flex: 1;
 `;

@@ -10,6 +10,16 @@ const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(file
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: {
+      '@': path.resolve(dirname, './src'),
+      'components': path.resolve(dirname, './src/components'),
+      'pages': path.resolve(dirname, './src/pages'),
+      'types': path.resolve(dirname, './src/types'),
+      'api': path.resolve(dirname, './src/api'),
+      'assets': path.resolve(dirname, './src/assets'),
+    },
+  },
   server: {
     open: '/',
     port: 3000,

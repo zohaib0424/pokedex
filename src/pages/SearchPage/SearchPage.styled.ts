@@ -1,29 +1,19 @@
 import styled from "styled-components";
 
 export const SearchHero = styled.div`
-  min-height: 100vh;
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
+  background-image: url("/images/pokeball.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 `;
 
-export const SearchHeroBg = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-
-  svg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
 
 export const SearchCard = styled.div`
   width: 427px;

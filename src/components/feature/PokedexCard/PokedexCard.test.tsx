@@ -4,50 +4,57 @@ import { PokedexCard } from "./PokedexCard";
 
 describe("PokedexCard Component", () => {
   const mockOnBackClick = vi.fn();
-  const mockIcon = <div data-testid="test-icon">Test Icon</div>;
   const mockChildren = <div data-testid="test-children">Test Content</div>;
+  const mockPokemonData = {
+    pokemonName: "Pikachu",
+    pokemonId: 25,
+    pokemonImageUrl: "https://example.com/pikachu.png",
+    pokemonTypes: ["electric"] as any,
+    pokemonDescription: "A cute electric mouse Pokemon",
+  };
 
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it("renders with icon and children", () => {
+  it("renders with Pokemon data and children", () => {
     render(
-      <PokedexCard icon={mockIcon}>
+      <PokedexCard {...mockPokemonData}>
         {mockChildren}
       </PokedexCard>
     );
 
-    expect(screen.getByTestId("test-icon")).toBeInTheDocument();
+    expect(screen.getByText("Pikachu #25")).toBeInTheDocument();
+    expect(screen.getByText("A cute electric mouse Pokemon")).toBeInTheDocument();
     expect(screen.getByTestId("test-children")).toBeInTheDocument();
   });
 
   it("renders with default green background color", () => {
     render(
-      <PokedexCard icon={mockIcon}>
+      <PokedexCard {...mockPokemonData}>
         {mockChildren}
       </PokedexCard>
     );
 
-    const container = screen.getByTestId("test-icon").closest("div")?.parentElement?.parentElement;
+    const container = screen.getByText("Pikachu #25").closest("div")?.parentElement?.parentElement?.parentElement;
     expect(container).toHaveStyle("background: #7AC74C");
   });
 
   it("renders with custom background color", () => {
     const customColor = "#FF6B6B";
     render(
-      <PokedexCard icon={mockIcon} backgroundColor={customColor}>
+      <PokedexCard {...mockPokemonData} backgroundColor={customColor}>
         {mockChildren}
       </PokedexCard>
     );
 
-    const container = screen.getByTestId("test-icon").closest("div")?.parentElement?.parentElement;
+    const container = screen.getByText("Pikachu #25").closest("div")?.parentElement?.parentElement?.parentElement;
     expect(container).toHaveStyle(`background: ${customColor}`);
   });
 
   it("renders back button when onBackClick is provided", () => {
     render(
-      <PokedexCard icon={mockIcon} onBackClick={mockOnBackClick}>
+      <PokedexCard {...mockPokemonData} onBackClick={mockOnBackClick}>
         {mockChildren}
       </PokedexCard>
     );
@@ -58,7 +65,7 @@ describe("PokedexCard Component", () => {
 
   it("does not render back button when onBackClick is not provided", () => {
     render(
-      <PokedexCard icon={mockIcon}>
+      <PokedexCard {...mockPokemonData}>
         {mockChildren}
       </PokedexCard>
     );
@@ -69,7 +76,7 @@ describe("PokedexCard Component", () => {
 
   it("calls onBackClick when back button is clicked", () => {
     render(
-      <PokedexCard icon={mockIcon} onBackClick={mockOnBackClick}>
+      <PokedexCard {...mockPokemonData} onBackClick={mockOnBackClick}>
         {mockChildren}
       </PokedexCard>
     );
@@ -83,29 +90,30 @@ describe("PokedexCard Component", () => {
   it("applies custom className", () => {
     const customClassName = "custom-pokedex-card";
     render(
-      <PokedexCard icon={mockIcon} className={customClassName}>
+      <PokedexCard {...mockPokemonData} className={customClassName}>
         {mockChildren}
       </PokedexCard>
     );
 
-    const container = screen.getByTestId("test-icon").closest("div")?.parentElement?.parentElement;
+    const container = screen.getByText("Pikachu #25").closest("div")?.parentElement?.parentElement?.parentElement;
     expect(container).toHaveClass(customClassName);
   });
 
-  it("renders icon in the correct container", () => {
+  it("renders Pokemon image when provided", () => {
     render(
-      <PokedexCard icon={mockIcon}>
+      <PokedexCard {...mockPokemonData}>
         {mockChildren}
       </PokedexCard>
     );
 
-    const iconContainer = screen.getByTestId("test-icon").parentElement;
-    expect(iconContainer).toBeInTheDocument();
+    const pokemonImage = screen.getByAltText("Pikachu");
+    expect(pokemonImage).toBeInTheDocument();
+    expect(pokemonImage).toHaveAttribute("src", "https://example.com/pikachu.png");
   });
 
   it("renders children in the content card", () => {
     render(
-      <PokedexCard icon={mockIcon}>
+      <PokedexCard {...mockPokemonData}>
         {mockChildren}
       </PokedexCard>
     );

@@ -1,8 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SearchPage } from "./pages/SearchPage";
-import { PokemonPage } from "./pages/PokemonPage/PokemonPage";
-import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
+import { SearchPage, PokemonPage, NotFoundPage } from "./pages";
 
 function App() {
   return (

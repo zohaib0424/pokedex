@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { PokemonBgImage, PokemonIcon } from "../../assets";
-import { Input } from "../../components/common/Input/Input";
-import { Button } from "../../components/common/Button/Button";
+import { PokemonIcon } from "../../assets";
+import { Input, Button } from "../../components";
 import { SearchPageProps } from "./SearchPage.type";
 import {
   generateRandomPokemonId,
@@ -11,7 +10,6 @@ import {
 } from "./SearchPage.utils";
 import {
   SearchHero,
-  SearchHeroBg,
   SearchCard,
   SearchCardLabel,
   SearchCardActions,
@@ -42,9 +40,6 @@ export const SearchPage = ({}: SearchPageProps) => {
 
   return (
     <SearchHero>
-      <SearchHeroBg>
-        <PokemonBgImage />
-      </SearchHeroBg>
       <SearchCard>
         <PokemonIcon />
         <InputContainer>

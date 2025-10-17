@@ -1,4 +1,4 @@
-import { PokemonAPI, PokemonDetails, PokemonSpeciesAPI, EvolutionChainAPI, PokemonTypeName } from '../types/pokemon'
+import { PokemonAPI, PokemonDetails, PokemonSpeciesAPI, EvolutionChainAPI, PokemonTypeName } from '../types'
 
 const BASE_URL = 'https://pokeapi.co/api/v2'
 
