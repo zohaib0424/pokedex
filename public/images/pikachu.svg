@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="512" height="512" role="img" aria-label="Pikachu silhouette">
+  <rect width="256" height="256" fill="none"/>
+  <g fill="#facc15" stroke="#92400e" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M64 88c-8-20 6-44 28-48 13-2 26 3 34 12 8-9 21-14 34-12 22 4 36 28 28 48 16 0 30 12 30 28s-14 28-30 28c-6 35-38 60-96 60S26 179 20 144C4 144-10 132-10 116S4 88 20 88c6-15 24-24 44-24z" transform="translate(48 32)"/>
+    <circle cx="116" cy="120" r="8" fill="#1f2937" stroke="none"/>
+    <circle cx="156" cy="120" r="8" fill="#1f2937" stroke="none"/>
+    <path d="M128 148c-8 8-24 8-32 0" fill="none"/>
+    <path d="M92 76l-18-30 30 10z" fill="#fcd34d"/>
+    <path d="M180 76l18-30-30 10z" fill="#fcd34d"/>
+  </g>
+</svg>
+
