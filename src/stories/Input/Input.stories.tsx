@@ -1,38 +1,38 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
-import { Input } from 'components';
+import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "storybook/test";
+import { Input } from "../../components/common/Input";
 
 const meta: Meta<typeof Input> = {
-  title: 'Components/Input',
+  title: "Components/Common/Input",
   component: Input,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     value: {
-      control: 'text',
-      description: 'The input value',
+      control: "text",
+      description: "The input value",
     },
     placeholder: {
-      control: 'text',
-      description: 'Placeholder text',
+      control: "text",
+      description: "Placeholder text",
     },
     onChange: {
-      action: 'changed',
-      description: 'Called when input value changes',
+      action: "changed",
+      description: "Called when input value changes",
     },
     onKeyDown: {
-      action: 'keyDown',
-      description: 'Called when a key is pressed',
+      action: "keyDown",
+      description: "Called when a key is pressed",
     },
     className: {
-      control: 'text',
-      description: 'Additional CSS class',
+      control: "text",
+      description: "Additional CSS class",
     },
-    'data-testid': {
-      control: 'text',
-      description: 'Test identifier',
+    "data-testid": {
+      control: "text",
+      description: "Test identifier",
     },
   },
   args: {
@@ -46,49 +46,52 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    value: '',
-    placeholder: 'Enter text...',
+    value: "",
+    placeholder: "Enter text...",
   },
 };
 
 export const WithValue: Story = {
   args: {
-    value: 'Hello World',
-    placeholder: 'Enter text...',
+    value: "Hello World",
+    placeholder: "Enter text...",
   },
 };
 
 export const WithCustomPlaceholder: Story = {
   args: {
-    value: '',
-    placeholder: 'Search for Pokemon...',
+    value: "",
+    placeholder: "Search for Pokemon...",
   },
 };
 
 export const WithCustomClass: Story = {
   args: {
-    value: '',
-    placeholder: 'Custom styled input',
-    className: 'custom-input',
+    value: "",
+    placeholder: "Custom styled input",
+    className: "custom-input",
   },
 };
 
 export const WithTestId: Story = {
   args: {
-    value: '',
-    placeholder: 'Input with test ID',
-    'data-testid': 'storybook-input',
+    value: "",
+    placeholder: "Input with test ID",
+    "data-testid": "storybook-input",
   },
 };
 
 export const AllVariations: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '300px' }}>
-      <Input
-        value=""
-        onChange={fn()}
-        placeholder="Default input"
-      />
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "16px",
+        width: "300px",
+      }}
+    >
+      <Input value="" onChange={fn()} placeholder="Default input" />
       <Input
         value="Pre-filled value"
         onChange={fn()}

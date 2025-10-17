@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
-import { Button } from "components";
+import { Button } from "@/components/common/Button";
+import { fn } from "storybook/test";
 
 const meta: Meta<typeof Button> = {
-  title: "Components/Button",
+  title: "Components/Common/Button",
   component: Button,
   parameters: {
     layout: "centered",
@@ -16,7 +16,7 @@ const meta: Meta<typeof Button> = {
     },
     variant: {
       control: { type: "select" },
-      options: ["primary", "secondary"],
+      options: ["primary", "secondary", "icon"],
       description: "Button variant",
     },
     onClick: {
@@ -66,37 +66,6 @@ export const Disabled: Story = {
   },
 };
 
-export const DisabledSecondary: Story = {
-  args: {
-    children: "Disabled Secondary",
-    variant: "secondary",
-    disabled: true,
-  },
-};
-
-export const WithCustomClass: Story = {
-  args: {
-    children: "Custom Button",
-    variant: "primary",
-    className: "custom-button",
-  },
-};
-
-export const WithTestId: Story = {
-  args: {
-    children: "Test Button",
-    variant: "primary",
-    "data-testid": "storybook-button",
-  },
-};
-
-export const LongText: Story = {
-  args: {
-    children: "This is a button with very long text content",
-    variant: "primary",
-  },
-};
-
 export const AllVariations: Story = {
   render: () => (
     <div
@@ -104,6 +73,7 @@ export const AllVariations: Story = {
         display: "flex",
         flexDirection: "column",
         gap: "16px",
+        alignItems: "flex-start",
         width: "200px",
       }}
     >
@@ -113,11 +83,17 @@ export const AllVariations: Story = {
       <Button onClick={fn()} variant="secondary">
         Secondary Button
       </Button>
+      <Button onClick={fn()} variant="icon" aria-label="Search">
+        🔍
+      </Button>
       <Button onClick={fn()} variant="primary" disabled>
         Disabled Primary
       </Button>
       <Button onClick={fn()} variant="secondary" disabled>
         Disabled Secondary
+      </Button>
+      <Button onClick={fn()} variant="icon" disabled aria-label="Favorite">
+        ❤️
       </Button>
     </div>
   ),
