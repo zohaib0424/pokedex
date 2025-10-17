@@ -2,15 +2,13 @@ import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import {
   getPokemon,
   getSpecies,
-  getEvolutionChainByUrl,
-  firstTypeColor,
+  getEvolutionChain,
   getPokemonDetails,
 } from "./pokeapi";
 import type {
   PokemonAPI,
   PokemonSpeciesAPI,
   EvolutionChainAPI,
-  PokemonTypeName,
 } from "../types/pokemon";
 
 describe("PokeAPI Service", () => {
@@ -22,56 +20,6 @@ describe("PokeAPI Service", () => {
 
   afterEach(() => {
     global.fetch = originalFetch;
-  });
-
-describe("firstTypeColor", () => {
-    it("returns a hex color for fire type", () => {
-      const color = firstTypeColor("fire");
-      expect(color).toMatch(/^#([0-9a-f]{3}){1,2}$/i);
-      expect(color).toBe("#EE8130");
-    });
-
-    it("returns a hex color for water type", () => {
-      const color = firstTypeColor("water");
-      expect(color).toBe("#6390F0");
-    });
-
-    it("returns a hex color for grass type", () => {
-      const color = firstTypeColor("grass");
-      expect(color).toBe("#7AC74C");
-    });
-
-    it("returns a hex color for electric type", () => {
-      const color = firstTypeColor("electric");
-      expect(color).toBe("#F7D02C");
-    });
-
-    it("returns a hex color for all pokemon types", () => {
-      const types = [
-        "normal",
-        "fire",
-        "water",
-        "electric",
-        "grass",
-        "ice",
-        "fighting",
-        "poison",
-        "ground",
-        "flying",
-        "psychic",
-        "bug",
-        "rock",
-        "ghost",
-        "dragon",
-        "dark",
-        "fairy",
-      ];
-
-      types.forEach((type) => {
-        const color = firstTypeColor(type as PokemonTypeName);
-        expect(color).toMatch(/^#([0-9a-f]{3}){1,2}$/i);
-      });
-    });
   });
 
   describe("getPokemon", () => {
@@ -185,7 +133,7 @@ describe("firstTypeColor", () => {
     });
   });
 
-  describe("getEvolutionChainByUrl", () => {
+  describe("getEvolutionChain", () => {
     it("fetches evolution chain data", async () => {
       const mockEvolutionChain: EvolutionChainAPI = {
         id: 10,
@@ -211,7 +159,7 @@ describe("firstTypeColor", () => {
       });
 
       const url = "https://pokeapi.co/api/v2/evolution-chain/10/";
-      const result = await getEvolutionChainByUrl(url);
+      const result = await getEvolutionChain(url);
       expect(result).toEqual(mockEvolutionChain);
       expect(global.fetch).toHaveBeenCalledWith(url);
     });
@@ -223,7 +171,7 @@ describe("firstTypeColor", () => {
       });
 
       await expect(
-        getEvolutionChainByUrl(
+        getEvolutionChain(
           "https://pokeapi.co/api/v2/evolution-chain/999999/"
         )
       ).rejects.toThrow("Request failed: 404");

@@ -1,8 +1,9 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
-import { getPokemonDetails, firstTypeColor } from "@/services/pokeapi";
+import { getPokemonDetails } from "@/services/pokeapi";
 import type { PokemonTypeName } from "@/types/pokemon";
+import { getPokemonTypeColor } from "@/constants";
 import { PokedexCard } from "components/feature/PokedexCard";
 import { TabType } from "components/feature/PokedexCard/PokedexCard.type";
 import { Stats } from "./components/Stats";
@@ -24,7 +25,7 @@ export function Pokemon() {
   const renderTabContent = useCallback(() => {
     if (!data) return null;
 
-    const bg = firstTypeColor(data?.types[0] as PokemonTypeName);
+    const bg = getPokemonTypeColor(data?.types[0] as PokemonTypeName);
 
     switch (activeTab) {
       case TabType.STATS:
@@ -45,7 +46,7 @@ export function Pokemon() {
   if (isError || !data)
     return <PokemonNotFound onBackClick={handleBackClick} />;
 
-  const bg = firstTypeColor(data.types[0] as PokemonTypeName);
+  const bg = getPokemonTypeColor(data.types[0] as PokemonTypeName);
 
   return (
     <PokedexCard

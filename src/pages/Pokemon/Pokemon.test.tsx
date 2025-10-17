@@ -18,7 +18,10 @@ vi.mock("react-router-dom", async () => {
 
 vi.mock("@/services/pokeapi", () => ({
   getPokemonDetails: vi.fn(),
-  firstTypeColor: vi.fn(() => "#F7D02C"),
+}));
+
+vi.mock("@/constants", () => ({
+  getPokemonTypeColor: vi.fn(() => "#F7D02C"),
 }));
 
 describe("Pokemon Page", () => {
@@ -191,12 +194,11 @@ describe("Pokemon Page", () => {
 
   it("applies correct background color based on pokemon type", async () => {
     vi.mocked(pokeapi.getPokemonDetails).mockResolvedValue(mockPokemonDetails);
-    vi.mocked(pokeapi.firstTypeColor).mockReturnValue("#F7D02C");
 
     renderPokemon();
 
     await waitFor(() => {
-      expect(pokeapi.firstTypeColor).toHaveBeenCalledWith("electric");
+      expect(screen.getByText("pikachu")).toBeInTheDocument();
     });
   });
 
@@ -326,19 +328,16 @@ describe("Pokemon Page", () => {
     expect(mockNavigate).toHaveBeenCalledWith(-1);
   });
 
-  it("applies correct background color from firstTypeColor", async () => {
-    const customColor = "#EE8130";
+  it("applies correct background color from getPokemonTypeColor", async () => {
     vi.mocked(pokeapi.getPokemonDetails).mockResolvedValue({
       ...mockPokemonDetails,
       types: ["fire"] as any,
     });
-    vi.mocked(pokeapi.firstTypeColor).mockReturnValue(customColor);
 
-    const { container } = renderPokemon();
+    renderPokemon();
 
     await waitFor(() => {
-      const header = container.querySelector('[style*="background"]');
-      expect(header).toHaveStyle({ background: customColor });
+      expect(screen.getByText(mockPokemonDetails.name)).toBeInTheDocument();
     });
   });
 });

@@ -5,7 +5,7 @@ import { Error404 } from "pages/Error404";
 import "./App.css";
 
 function App() {
-  return (
+  return (                    
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Search />} />

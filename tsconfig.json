@@ -21,7 +21,8 @@
       "types/*": ["./src/types/*"],
       "assets/*": ["./src/assets/*"],
       "services/*": ["./src/services/*"],
-      "constants/*": ["./src/constants/*"]
+      "constants/*": ["./src/constants/*"],
+      "utils/*": ["./src/utils/*"]
     }
   },
   "include": [
