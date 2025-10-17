@@ -68,7 +68,7 @@ export const PokemonIcon = () => {
   );
 };
 
-export const BackIcon = () => {
+export const BackIcon = ({ className = "" }: { className?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -76,6 +76,7 @@ export const BackIcon = () => {
       height="67"
       fill="none"
       viewBox="0 0 39 67"
+      className={className}
     >
       <path
         fill="#FAFAFA"

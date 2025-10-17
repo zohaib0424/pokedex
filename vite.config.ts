@@ -4,20 +4,21 @@ import react from '@vitejs/plugin-react';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
+import tailwindcss from '@tailwindcss/vite'
 
-// eslint-disable-next-line no-undef
 const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss(),],
   resolve: {
     alias: {
       '@': path.resolve(dirname, './src'),
       'components': path.resolve(dirname, './src/components'),
       'pages': path.resolve(dirname, './src/pages'),
       'types': path.resolve(dirname, './src/types'),
-      'api': path.resolve(dirname, './src/api'),
+      'api': path.resolve(dirname, './src/services'),
       'assets': path.resolve(dirname, './src/assets'),
+      'constants': path.resolve(dirname, './src/constants'),
     },
   },
   server: {

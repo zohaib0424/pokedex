@@ -88,4 +88,40 @@ describe("Button Component", () => {
 
     expect(mockOnClick).not.toHaveBeenCalled();
   });
+
+  it("renders with icon variant", () => {
+    render(
+      <Button onClick={mockOnClick} variant="icon" aria-label="Icon button">
+        <svg data-testid="icon-svg" />
+      </Button>
+    );
+
+    const button = screen.getByLabelText("Icon button");
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveClass("bg-transparent");
+  });
+
+  it("renders icon variant with aria-label", () => {
+    render(
+      <Button onClick={mockOnClick} variant="icon" aria-label="Go back">
+        <span>Icon</span>
+      </Button>
+    );
+
+    const button = screen.getByLabelText("Go back");
+    expect(button).toBeInTheDocument();
+  });
+
+  it("icon variant calls onClick when clicked", () => {
+    render(
+      <Button onClick={mockOnClick} variant="icon" aria-label="Icon button">
+        <span>Icon</span>
+      </Button>
+    );
+
+    const button = screen.getByLabelText("Icon button");
+    fireEvent.click(button);
+
+    expect(mockOnClick).toHaveBeenCalledTimes(1);
+  });
 });

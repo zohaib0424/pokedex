@@ -17,11 +17,11 @@
     "paths": {
       "@/*": ["./src/*"],
       "components/*": ["./src/components/*"],
-      "pages": ["./src/pages"],
       "pages/*": ["./src/pages/*"],
       "types/*": ["./src/types/*"],
-      "api/*": ["./src/api/*"],
-      "assets/*": ["./src/assets/*"]
+      "assets/*": ["./src/assets/*"],
+      "services/*": ["./src/services/*"],
+      "constants/*": ["./src/constants/*"]
     }
   },
   "include": [

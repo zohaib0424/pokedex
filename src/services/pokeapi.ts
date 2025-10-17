@@ -1,6 +1,7 @@
 import { PokemonAPI, PokemonDetails, PokemonSpeciesAPI, EvolutionChainAPI, PokemonTypeName } from '../types'
+import { getPokemonTypeColor } from '@/constants'
 
-const BASE_URL = 'https://pokeapi.co/api/v2'
+const BASE_URL = import.meta.env.VITE_POKEMON_API_BASE_URL || 'https://pokeapi.co/api/v2'
 
 async function fetchJson<T>(url: string): Promise<T> {
   const res = await fetch(url)
@@ -21,12 +22,7 @@ export async function getEvolutionChainByUrl(url: string): Promise<EvolutionChai
 }
 
 export function firstTypeColor(type: PokemonTypeName): string {
-  const map: Record<PokemonTypeName, string> = {
-    normal: '#A8A77A', fire: '#EE8130', water: '#6390F0', electric: '#F7D02C', grass: '#7AC74C', ice: '#96D9D6',
-    fighting: '#C22E28', poison: '#A33EA1', ground: '#E2BF65', flying: '#A98FF3', psychic: '#F95587',
-    bug: '#A6B91A', rock: '#B6A136', ghost: '#735797', dragon: '#6F35FC', dark: '#705746', steel: '#B7B7CE', fairy: '#D685AD'
-  }
-  return map[type]
+  return getPokemonTypeColor(type)
 }
 
 export async function getPokemonDetails(idOrName: string | number): Promise<PokemonDetails> {

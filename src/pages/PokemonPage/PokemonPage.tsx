@@ -1,10 +1,11 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { getPokemonDetails, firstTypeColor } from "../../api";
-import { PokemonTypeName } from "../../types";
-import { PokedexCard, StatsDisplay } from "../../components";
-import { TabType } from "../../components/feature/PokedexCard/PokedexCard.type";
+import { useCallback, useState } from "react";
+import { getPokemonDetails, firstTypeColor } from "@/services";
+import type { PokemonTypeName } from "@/types";
+import { PokedexCard } from "components/feature/PokedexCard";
+import type { TabType } from "components/feature/PokedexCard/PokedexCard.type";
+import { StatsDisplay } from "./components/StatsDisplay";
 
 export function PokemonPage() {
   const { idOrName = "" } = useParams();
@@ -16,42 +17,46 @@ export function PokemonPage() {
     queryFn: () => getPokemonDetails(idOrName!),
   });
 
-  if (isLoading) return <div style={{ padding: 24 }}>Loading…</div>;
-  if (isError || !data)
-    return <div style={{ padding: 24 }}>Pokemon not found</div>;
+  const renderTabContent = useCallback(() => {
+    if (!data) return null;
+
+    const bg = firstTypeColor(data?.types[0] as PokemonTypeName);
+
+    switch (activeTab) {
+      case "STATS":
+        return <StatsDisplay stats={data.stats} color={bg} />;
+      case "EVOLUTIONS":
+        return (
+          <div className="text-center text-gray-600">
+            Evolutions coming soon...
+          </div>
+        );
+      case "MOVES":
+        return (
+          <div className="text-center text-gray-600">Moves coming soon...</div>
+        );
+      default:
+        return <StatsDisplay stats={data.stats} color={bg} />;
+    }
+  }, [activeTab, data]);
+
+  if (isLoading) return <div className="p-6">Loading…</div>;
+  if (isError || !data) return <div className="p-6">Pokemon not found</div>;
 
   const bg = firstTypeColor(data?.types[0] as PokemonTypeName);
 
-  const handleBackClick = () => {
-    navigate(-1);
-  };
-
-  const handleTabChange = (tab: TabType) => {
-    setActiveTab(tab);
-  };
-
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case "STATS":
-        return <div> Stats coming soon...</div>;
-      case "EVOLUTIONS":
-        return <div>Evolutions coming soon...</div>;
-      case "MOVES":
-        return <div>Moves coming soon...</div>;
-      default:
-        return <div> Stats coming soon...</div>;
-    }
-  };
+  const handleBackClick = () => navigate(-1);
+  const handleTabChange = (tab: TabType) => setActiveTab(tab);
 
   return (
     <PokedexCard
-      pokemonName={data.name}
       pokemonId={data.id}
-      pokemonImageUrl={data.imageUrl || undefined}
-      pokemonTypes={data.types}
-      pokemonDescription={data.description}
       backgroundColor={bg}
       activeTab={activeTab}
+      pokemonName={data.name}
+      pokemonTypes={data.types}
+      pokemonDescription={data.description}
+      pokemonImageUrl={data.imageUrl || undefined}
       onBackClick={handleBackClick}
       onTabChange={handleTabChange}
     >

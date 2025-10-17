@@ -1,4 +1,4 @@
-export type ButtonVariant = 'primary' | 'secondary';
+export type ButtonVariant = 'primary' | 'secondary' | 'icon';
 
 export interface ButtonProps {
   children: React.ReactNode;
@@ -6,5 +6,7 @@ export interface ButtonProps {
   variant?: ButtonVariant;
   className?: string;
   disabled?: boolean;
+  style?: React.CSSProperties;
   'data-testid'?: string;
+  'aria-label'?: string;
 }
