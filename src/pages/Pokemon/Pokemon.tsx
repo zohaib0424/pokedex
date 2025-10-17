@@ -4,16 +4,17 @@ import { useCallback, useState } from "react";
 import { getPokemonDetails, firstTypeColor } from "@/services/pokeapi";
 import type { PokemonTypeName } from "@/types/pokemon";
 import { PokedexCard } from "components/feature/PokedexCard";
-import type { TabType } from "components/feature/PokedexCard/PokedexCard.type";
+import { TabType } from "components/feature/PokedexCard/PokedexCard.type";
 import { Stats } from "./components/Stats";
 import { Evolutions } from "./components/Evolutions";
 import { Moves } from "./components/Moves";
 import { PokemonNotFound } from "../PokemonNotFound";
+import { Loading } from "@/components";
 
 export function Pokemon() {
   const { idOrName = "" } = useParams();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<TabType>("STATS");
+  const [activeTab, setActiveTab] = useState<TabType>(TabType.STATS);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["pokemon", idOrName],
@@ -26,11 +27,11 @@ export function Pokemon() {
     const bg = firstTypeColor(data?.types[0] as PokemonTypeName);
 
     switch (activeTab) {
-      case "STATS":
+      case TabType.STATS:
         return <Stats stats={data.stats} color={bg} />;
-      case "EVOLUTIONS":
+      case TabType.EVOLUTIONS:
         return <Evolutions evolutions={data.evolutions || []} color={bg} />;
-      case "MOVES":
+      case TabType.MOVES:
         return <Moves moves={data.moves || []} color={bg} />;
       default:
         return <div>No tab selected</div>;
@@ -38,10 +39,9 @@ export function Pokemon() {
   }, [activeTab, data]);
 
   const handleBackClick = () => navigate(-1);
-
   const handleTabChange = (tab: TabType) => setActiveTab(tab);
 
-  if (isLoading) return <div className="p-6">Loading…</div>;
+  if (isLoading) return <Loading />;
   if (isError || !data)
     return <PokemonNotFound onBackClick={handleBackClick} />;
 

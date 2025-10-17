@@ -18,3 +18,6 @@ export type { PokedexCardProps } from "./feature/PokedexCard";
 
 export { MoveTile } from "./feature/MoveTile";
 export type { MoveTileProps } from "./feature/MoveTile";
+
+export { Loading } from "./feature/Loading";
+export type { LoadingProps } from "./feature/Loading";

@@ -1,9 +1,10 @@
 import React from "react";
-import { PokedexCardProps } from "./PokedexCard.type";
+import { PokedexCardProps, TabType } from "./PokedexCard.type";
 import { TypeBadge } from "components/common/TypeBadge";
 import { Tabs } from "components/common/Tabs";
 import { Header } from "components/feature/Header";
 
+const tabs = [TabType.STATS, TabType.EVOLUTIONS, TabType.MOVES] as const;
 export const PokedexCard: React.FC<PokedexCardProps> = ({
   pokemonName,
   pokemonId: _pokemonId,
@@ -18,7 +19,11 @@ export const PokedexCard: React.FC<PokedexCardProps> = ({
   children,
 }) => {
   return (
-    <Header backgroundColor={backgroundColor} onBackClick={onBackClick} className={className}>
+    <Header
+      backgroundColor={backgroundColor}
+      onBackClick={onBackClick}
+      className={className}
+    >
       <div className="bg-white rounded-t-3xl flex-1 px-4 py-6 mt-[180px] mx-4 sm:px-6 sm:py-8 sm:mt-[200px] sm:mx-8 md:mt-[220px] md:mx-16 lg:mt-[250px] lg:ml-[150px] lg:mr-[150px] relative z-[3] min-h-[60vh] flex flex-col">
         <div className="flex justify-center items-center">
           {pokemonImageUrl && (
@@ -47,8 +52,8 @@ export const PokedexCard: React.FC<PokedexCardProps> = ({
           )}
           <div className="flex justify-center py-4 sm:py-6 md:py-8">
             <Tabs
-              tabs={["STATS", "EVOLUTIONS", "MOVES"] as const}
-              activeTab={activeTab}
+              tabs={tabs}
+              activeTab={activeTab as TabType}
               onTabChange={onTabChange}
               backgroundColor={backgroundColor}
             />

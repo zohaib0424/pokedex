@@ -1,7 +1,11 @@
 import { ReactNode } from "react";
 import { PokemonTypeName } from "../../../types/pokemon";
 
-export type TabType = 'STATS' | 'EVOLUTIONS' | 'MOVES';
+export enum TabType {
+  STATS = 'STATS',
+  EVOLUTIONS = 'EVOLUTIONS',
+  MOVES = 'MOVES',
+}
 
 export interface PokedexCardProps {
   pokemonName: string;
