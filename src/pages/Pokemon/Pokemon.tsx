@@ -39,7 +39,7 @@ export function Pokemon() {
     }
   }, [activeTab, data]);
 
-  const handleBackClick = () => navigate(-1);
+  const handleBackClick = () => navigate(-1) || navigate('/');
   const handleTabChange = (tab: TabType) => setActiveTab(tab);
 
   if (isLoading) return <Loading />;
