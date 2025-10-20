@@ -5,7 +5,10 @@ import type { MovesProps } from "./Moves.type";
 export const Moves: React.FC<MovesProps> = ({ moves, color: _color }) => {
   if (!moves || moves.length === 0) {
     return (
-      <div className="flex items-center justify-center py-8">
+      <div
+        className="text-[24px] sm:text-[32px] md:text-[40px] font-bold text-gray-600 text-center px-4"
+        style={{ fontFamily: "Single Day, cursive" }}
+      >
         <div className="text-gray-600">No moves available</div>
       </div>
     );

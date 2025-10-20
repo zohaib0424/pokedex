@@ -28,7 +28,12 @@ export const Evolutions: React.FC<EvolutionsProps> = ({
   if (evolutionData.length === 1) {
     return (
       <div className="flex items-center justify-center py-8">
-        <div className="text-gray-600">This Pokémon does not evolve</div>
+        <div 
+          className="text-[24px] sm:text-[32px] md:text-[40px] font-bold text-gray-600 text-center px-4"
+          style={{ fontFamily: "Single Day, cursive" }}
+        >
+          This Pokémon does not evolve
+        </div>
       </div>
     );
   }

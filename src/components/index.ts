@@ -21,3 +21,6 @@ export type { MoveTileProps } from "./feature/MoveTile";
 
 export { Loading } from "./feature/Loading";
 export type { LoadingProps } from "./feature/Loading";
+
+export { BarChart } from "./feature/Charts/BarChart";
+export type { BarChartProps, BarChartData } from "./feature/Charts/BarChart";

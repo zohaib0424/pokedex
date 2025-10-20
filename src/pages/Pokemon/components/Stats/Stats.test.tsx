@@ -1,6 +1,22 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { Stats } from "./Stats";
+import * as chartUtils from "../../../../utils/chart.utils";
+import { BarChartProps } from "../../../../components/feature/Charts/BarChart/BarChart.type";
+
+// Mock the BarChart component
+vi.mock("../../../../components/feature/Charts/BarChart", () => ({
+  BarChart: ({ data, color, maxValue }: BarChartProps) => (
+    <div data-testid="bar-chart" data-color={color} data-max-value={maxValue}>
+      {data.map((item, index: number) => (
+        <div key={index} data-testid="chart-item">
+          <span>{item.stat}</span>
+          <span>{item.value.toString().padStart(3, "0")}</span>
+        </div>
+      ))}
+    </div>
+  ),
+}));
 
 describe("Stats Component", () => {
   const mockStats = [
@@ -14,7 +30,35 @@ describe("Stats Component", () => {
 
   const mockColor = "#7AC74C";
 
-  it("renders all stats", () => {
+  it("renders BarChart component", () => {
+    render(<Stats stats={mockStats} color={mockColor} />);
+
+    expect(screen.getByTestId("bar-chart")).toBeInTheDocument();
+  });
+
+  it("passes correct color to BarChart", () => {
+    render(<Stats stats={mockStats} color={mockColor} />);
+
+    const barChart = screen.getByTestId("bar-chart");
+    expect(barChart).toHaveAttribute("data-color", mockColor);
+  });
+
+  it("passes MAX_STAT_VALUE to BarChart", () => {
+    render(<Stats stats={mockStats} color={mockColor} />);
+
+    const barChart = screen.getByTestId("bar-chart");
+    expect(barChart).toHaveAttribute("data-max-value", "200");
+  });
+
+  it("calls parseStatsForChart with stats", () => {
+    const parseStatsSpy = vi.spyOn(chartUtils, "parseStatsForChart");
+    
+    render(<Stats stats={mockStats} color={mockColor} />);
+
+    expect(parseStatsSpy).toHaveBeenCalledWith(mockStats);
+  });
+
+  it("renders all stat abbreviations", () => {
     render(<Stats stats={mockStats} color={mockColor} />);
 
     expect(screen.getByText("HP")).toBeInTheDocument();
@@ -25,69 +69,41 @@ describe("Stats Component", () => {
     expect(screen.getByText("SPD")).toBeInTheDocument();
   });
 
-  it("renders stat values", () => {
+  it("renders stat values with zero padding", () => {
     render(<Stats stats={mockStats} color={mockColor} />);
 
     expect(screen.getByText("045")).toBeInTheDocument(); // HP
     expect(screen.getByText("049")).toBeInTheDocument(); // Attack
+    expect(screen.getByText("065")).toBeInTheDocument(); // Special Attack
   });
 
-  it("pads stat values with zeros to 3 digits", () => {
+  it("handles single stat", () => {
     const stats = [{ name: "hp", value: 5 }];
     render(<Stats stats={stats} color={mockColor} />);
 
+    expect(screen.getByText("HP")).toBeInTheDocument();
     expect(screen.getByText("005")).toBeInTheDocument();
   });
 
-  it("displays three-digit values correctly", () => {
-    const stats = [{ name: "attack", value: 150 }];
+  it("handles empty stats array", () => {
+    render(<Stats stats={[]} color={mockColor} />);
+
+    const chartItems = screen.queryAllByTestId("chart-item");
+    expect(chartItems).toHaveLength(0);
+  });
+
+  it("handles high stat values", () => {
+    const stats = [{ name: "attack", value: 180 }];
     render(<Stats stats={stats} color={mockColor} />);
 
-    expect(screen.getByText("150")).toBeInTheDocument();
-  });
-
-  it("applies correct color to stat abbreviations", () => {
-    const customColor = "#FF6B6B";
-    render(<Stats stats={mockStats} color={customColor} />);
-
-    const hpLabel = screen.getByText("HP");
-    expect(hpLabel).toHaveStyle({ color: customColor });
-  });
-
-  it("applies correct color to stat bars", () => {
-    const customColor = "#FF6B6B";
-    const { container } = render(<Stats stats={mockStats} color={customColor} />);
-
-    const statBars = container.querySelectorAll('[style*="backgroundColor"]');
-    statBars.forEach((bar) => {
-      expect(bar).toHaveStyle({ backgroundColor: customColor });
-    });
-  });
-
-  it("calculates stat percentage correctly", () => {
-    const stats = [{ name: "hp", value: 100 }];
-    const { container } = render(<Stats stats={stats} color={mockColor} />);
-
-    // 100 / 200 (MAX_STAT_VALUE) = 50%
-    const statBar = container.querySelector('[style*="width"]');
-    expect(statBar).toHaveStyle({ width: "50%" });
-  });
-
-  it("caps stat percentage at 100%", () => {
-    const stats = [{ name: "hp", value: 300 }]; // Exceeds MAX_STAT_VALUE
-    const { container } = render(<Stats stats={stats} color={mockColor} />);
-
-    const statBar = container.querySelector('[style*="width"]');
-    expect(statBar).toHaveStyle({ width: "100%" });
+    expect(screen.getByText("180")).toBeInTheDocument();
   });
 
   it("handles zero value stats", () => {
     const stats = [{ name: "hp", value: 0 }];
-    const { container } = render(<Stats stats={stats} color={mockColor} />);
+    render(<Stats stats={stats} color={mockColor} />);
 
     expect(screen.getByText("000")).toBeInTheDocument();
-    const statBar = container.querySelector('[style*="width"]');
-    expect(statBar).toHaveStyle({ width: "0%" });
   });
 
   it("handles unknown stat names", () => {
@@ -97,83 +113,32 @@ describe("Stats Component", () => {
     expect(screen.getByText("UNKNOWN-STAT")).toBeInTheDocument();
   });
 
-  it("renders stat bars with correct background", () => {
-    const { container } = render(<Stats stats={mockStats} color={mockColor} />);
+  it("passes custom color correctly", () => {
+    const customColor = "#FF6B6B";
+    render(<Stats stats={mockStats} color={customColor} />);
 
-    const statBarContainers = container.querySelectorAll(".bg-gray-200");
-    expect(statBarContainers.length).toBeGreaterThan(0);
+    const barChart = screen.getByTestId("bar-chart");
+    expect(barChart).toHaveAttribute("data-color", customColor);
   });
 
-  it("renders stat bars with rounded corners", () => {
-    const { container } = render(<Stats stats={mockStats} color={mockColor} />);
+  it("renders correct number of chart items", () => {
+    render(<Stats stats={mockStats} color={mockColor} />);
 
-    const statBarContainers = container.querySelectorAll(".rounded-full");
-    expect(statBarContainers.length).toBeGreaterThan(0);
+    const chartItems = screen.getAllByTestId("chart-item");
+    expect(chartItems).toHaveLength(mockStats.length);
   });
 
-  it("renders all stats in flex layout", () => {
-    const { container } = render(<Stats stats={mockStats} color={mockColor} />);
-
-    const mainContainer = container.firstChild as HTMLElement;
-    expect(mainContainer).toHaveClass("flex");
-    expect(mainContainer).toHaveClass("flex-col");
-  });
-
-  it("renders correct number of stat rows", () => {
-    const { container } = render(<Stats stats={mockStats} color={mockColor} />);
-
-    const statRows = container.querySelectorAll(".flex.items-center");
-    expect(statRows.length).toBe(mockStats.length);
-  });
-
-  it("handles high stat values correctly", () => {
-    const stats = [{ name: "attack", value: 180 }];
+  it("passes parsed data to BarChart", () => {
+    const stats = [
+      { name: "hp", value: 100 },
+      { name: "attack", value: 150 },
+    ];
     render(<Stats stats={stats} color={mockColor} />);
 
-    expect(screen.getByText("180")).toBeInTheDocument();
-  });
-
-  it("renders stat abbreviations in uppercase", () => {
-    const stats = [{ name: "hp", value: 50 }];
-    render(<Stats stats={stats} color={mockColor} />);
-
-    const hpLabel = screen.getByText("HP");
-    expect(hpLabel).toHaveClass("uppercase");
-  });
-
-  it("handles empty stats array", () => {
-    const { container } = render(<Stats stats={[]} color={mockColor} />);
-
-    const statRows = container.querySelectorAll(".flex.items-center");
-    expect(statRows.length).toBe(0);
-  });
-
-  it("calculates percentage for minimum stat value", () => {
-    const stats = [{ name: "hp", value: 1 }];
-    const { container } = render(<Stats stats={stats} color={mockColor} />);
-
-    // 1 / 200 = 0.5%
-    const statBar = container.querySelector('[style*="width"]');
-    expect(statBar).toHaveStyle({ width: "0.5%" });
-  });
-
-  it("calculates percentage for mid-range stat value", () => {
-    const stats = [{ name: "hp", value: 50 }];
-    const { container } = render(<Stats stats={stats} color={mockColor} />);
-
-    // 50 / 200 = 25%
-    const statBar = container.querySelector('[style*="width"]');
-    expect(statBar).toHaveStyle({ width: "25%" });
-  });
-
-  it("renders with transition classes", () => {
-    const { container } = render(<Stats stats={mockStats} color={mockColor} />);
-
-    const statBars = container.querySelectorAll('[style*="backgroundColor"]');
-    statBars.forEach((bar) => {
-      expect(bar).toHaveClass("transition-all");
-      expect(bar).toHaveClass("duration-300");
-    });
+    expect(screen.getByText("HP")).toBeInTheDocument();
+    expect(screen.getByText("100")).toBeInTheDocument();
+    expect(screen.getByText("ATK")).toBeInTheDocument();
+    expect(screen.getByText("150")).toBeInTheDocument();
   });
 });
 

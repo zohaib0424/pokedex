@@ -50,7 +50,7 @@ export const PokedexCard: React.FC<PokedexCardProps> = ({
               {pokemonDescription}
             </p>
           )}
-          <div className="flex justify-center py-4 sm:py-6 md:py-8">
+          <div className="flex justify-center py-4 sm:py-6 md:py-2">
             <Tabs
               tabs={tabs}
               activeTab={activeTab as TabType}
