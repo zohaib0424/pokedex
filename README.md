@@ -2,6 +2,27 @@
 
 A modern React-based Pokédex application that allows users to search and explore Pokémon information. Built with React, TypeScript, Vite, and Tailwind CSS, utilizing GraphQL for efficient data fetching from the PokéAPI.
 
+## 📑 Table of Contents
+
+- [Features](#-features)
+- [Screenshots](#-screenshots)
+- [Tech Stack](#️-tech-stack)
+- [Application Architecture](#️-application-architecture)
+- [How It Works](#-how-it-works)
+- [How to Run](#how-to-run)
+- [How to Test](#how-to-test)
+- [Project Structure](#project-structure)
+- [GraphQL Implementation](#-graphql-implementation)
+- [Styling & UI](#-styling--ui)
+- [Current Implementation Status](#-current-implementation-status)
+- [Component Breakdown](#-component-breakdown)
+- [Contributing](#contributing)
+- [API Information](#-api-information)
+- [Deployment](#-deployment)
+- [Adding Screenshots](#-adding-screenshots)
+- [Additional Resources](#-additional-resources)
+- [License](#license)
+
 ## 🎯 Features
 
 - 🔍 **Search Functionality**: Search Pokémon by name or ID with instant results
