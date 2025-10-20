@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
-import { getPokemon } from "@/services/pokeapi";
 import type { Evolution } from "./Evolutions.type";
+
+interface PokemonAPIResponse {
+  id: number;
+  name: string;
+}
 
 export const useEvolutions = (evolutions: string[]) => {
   const [evolutionData, setEvolutionData] = useState<Evolution[]>([]);
@@ -10,18 +14,30 @@ export const useEvolutions = (evolutions: string[]) => {
     const fetchEvolutionData = async () => {
       try {
         setLoading(true);
-        const data = await Promise.all(
-          evolutions.map(async (name) => {
-            const pokemon = await getPokemon(name);
+
+        const evolutionPromises = evolutions.map(async (name) => {
+          try {
+            const response = await fetch(
+              `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
+            );
+            const data = (await response.json()) as PokemonAPIResponse;
+
             return {
-              name: pokemon.name,
-              imageUrl:
-                pokemon.sprites.other?.["official-artwork"]?.front_default ??
-                null,
-              id: pokemon.id,
+              name: data.name,
+              imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`,
+              id: data.id,
             };
-          })
-        );
+          } catch (error) {
+            console.error(`Error fetching ${name}:`, error);
+            return {
+              name,
+              imageUrl: null,
+              id: 0,
+            };
+          }
+        });
+
+        const data = await Promise.all(evolutionPromises);
         setEvolutionData(data);
       } catch (error) {
         console.error("Error fetching evolution data:", error);
@@ -31,7 +47,7 @@ export const useEvolutions = (evolutions: string[]) => {
     };
 
     if (evolutions.length > 0) {
-      fetchEvolutionData();
+      void fetchEvolutionData();
     } else {
       setLoading(false);
     }
@@ -39,4 +55,3 @@ export const useEvolutions = (evolutions: string[]) => {
 
   return { evolutionData, loading };
 };
-
