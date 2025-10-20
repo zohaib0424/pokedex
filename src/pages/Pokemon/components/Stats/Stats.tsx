@@ -1,6 +1,6 @@
 import React from "react";
 import { BarChart } from "@/components/feature/Charts/BarChart";
-import { parseStatsForChart } from "@/utils/chart.utils";
+import { parseStatsForChart } from "@/utils/chart";
 import { MAX_STAT_VALUE } from "./Stats.constants";
 import { StatsProps } from "./Stats.type";
 

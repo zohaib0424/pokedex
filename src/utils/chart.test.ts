@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getStatAbbreviation, parseStatsForChart } from "./chart.utils";
+import { getStatAbbreviation, parseStatsForChart } from "./chart";
 import { Stat } from "../pages/Pokemon/components/Stats/Stats.type";
 
 describe("chart.utils", () => {

@@ -7,7 +7,7 @@ import {
   extractEvolutionChain,
   extractLevelUpMoves,
   transformPokemonDetails,
-} from "./pokemon.utils";
+} from "./pokemon";
 import {
   PokemonAPI,
   PokemonSpeciesAPI,

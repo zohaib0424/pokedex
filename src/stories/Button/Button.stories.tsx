@@ -1,6 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "../../components/common/Button";
-import { ChevronLeft } from "lucide-react";
+import { Button } from "@/components/common/Button";
+
+// Simple ChevronLeft icon component
+const ChevronLeft = ({ size = 24 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <polyline points="15 18 9 12 15 6" />
+  </svg>
+);
 
 const meta = {
   title: "Components/Button",

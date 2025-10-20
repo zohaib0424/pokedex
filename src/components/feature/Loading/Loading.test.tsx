@@ -10,7 +10,7 @@ describe('Loading', () => {
 
   it('renders pokeball icon', () => {
     render(<Loading />);
-    const image = screen.getByAlt('Loading');
+    const image = screen.getByAltText('Loading');
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute('src', '/images/pokeball.svg');
   });

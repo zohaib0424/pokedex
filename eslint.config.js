@@ -8,7 +8,7 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  { ignores: ['dist', 'node_modules', '*.config.js', '*.config.ts', 'public/**'] },
+  { ignores: ['dist', 'node_modules', '*.config.js', '*.config.ts', 'public/**', '.storybook/**', 'vitest.shims.d.ts'] },
   {
     files: ['**/*.{js,jsx}'],
     extends: [js.configs.recommended],
@@ -68,6 +68,7 @@ export default tseslint.config(
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-floating-promises': 'off',
       '@typescript-eslint/no-misused-promises': 'off',
+      '@typescript-eslint/no-unnecessary-type-assertion': 'off',
     },
   },
   // Relaxed rules for test files and stories

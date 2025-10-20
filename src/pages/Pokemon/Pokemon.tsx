@@ -11,7 +11,7 @@ import { Stats } from "./components/Stats";
 import { Evolutions } from "./components/Evolutions";
 import { Moves } from "./components/Moves";
 import { PokemonNotFound } from "../PokemonNotFound";
-import { Loading } from "@/components";
+import { Loading } from "@/components/feature/Loading";
 import { usePokemonTransform } from "./usePokemonTransform.hook";
 
 export function Pokemon() {

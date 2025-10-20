@@ -10,4 +10,3 @@ export const normalizeSearchQuery = (query: string): string =>
 
 export const isValidSearchQuery = (query: string): boolean =>
   normalizeSearchQuery(query).length > 0;
-

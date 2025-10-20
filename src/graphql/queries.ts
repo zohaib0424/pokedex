@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 const POKEMON_FIELDS = gql`
   fragment PokemonFields on pokemon_v2_pokemon {
@@ -16,11 +16,7 @@ const POKEMON_FIELDS = gql`
       }
     }
     pokemon_v2_pokemonmoves(
-      where: {
-        pokemon_v2_movelearnmethod: {
-          name: { _eq: "level-up" }
-        }
-      }
+      where: { pokemon_v2_movelearnmethod: { name: { _eq: "level-up" } } }
       order_by: { level: asc }
     ) {
       level
@@ -33,11 +29,7 @@ const POKEMON_FIELDS = gql`
     }
     pokemon_v2_pokemonspecy {
       pokemon_v2_pokemonspeciesflavortexts(
-        where: {
-          pokemon_v2_language: {
-            name: { _eq: "en" }
-          }
-        }
+        where: { pokemon_v2_language: { name: { _eq: "en" } } }
         limit: 1
       ) {
         flavor_text

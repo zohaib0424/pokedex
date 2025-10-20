@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { Stats } from "./Stats";
-import * as chartUtils from "../../../../utils/chart.utils";
+import * as chartUtils from "../../../../utils/chart";
 import { BarChartProps } from "../../../../components/feature/Charts/BarChart/BarChart.type";
 
 // Mock the BarChart component

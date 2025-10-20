@@ -15,7 +15,7 @@ export const Moves: React.FC<MovesProps> = ({ moves, color: _color }) => {
   }
 
   return (
-    <div className="flex flex-col gap-3 sm:gap-4 w-full max-h-[calc(100vh-780px)] overflow-y-auto pr-1 sm:pr-2">
+    <div className="flex flex-col gap-3 sm:gap-4 w-full max-h-[calc(100vh-732px)] overflow-y-auto pr-1 sm:pr-2">
       {moves.map((move, index) => (
         <MoveTile
           key={`${move.name}-${move.level}-${index}`}
