@@ -42,17 +42,7 @@ cd pokedex
 npm install
 ```
 
-3. Set up environment variables:
-```bash
-cp .env.example .env.local
-```
-
-Edit `.env.local` if you need to customize the API URL. By default, it uses:
-```
-VITE_POKEMON_API_BASE_URL=https://pokeapi.co/api/v2
-```
-
-4. Start the development server:
+3. Start the development server:
 ```bash
 npm run dev
 ```
@@ -66,6 +56,10 @@ The application will be available at `http://localhost:3000`
 - **Run Storybook**: `npm run storybook`
 - **Build Storybook**: `npm run build-storybook`
 - **Lint code**: `npm run lint`
+- **Run tests**: `npx vitest`
+- **Run tests in watch mode**: `npx vitest --watch`
+- **Run tests with coverage**: `npx vitest --coverage`
+- **Run tests with UI**: `npx vitest --ui`
 
 ## How to Test
 
@@ -73,50 +67,52 @@ The application will be available at `http://localhost:3000`
 
 To run all tests in the project:
 ```bash
-npm test
+npx vitest
 ```
 
 ### Run Tests with Coverage
 
 To run tests with coverage report:
 ```bash
-npm run test:coverage
+npx vitest --coverage
 ```
 
 ### Run Tests in Watch Mode
 
 To run tests in watch mode during development:
 ```bash
-npm run test:watch
+npx vitest --watch
 ```
 
 ### Run Tests with UI
 
 To run tests with the Vitest UI:
 ```bash
-npm run test:ui
+npx vitest --ui
 ```
 
 ### Test Files
 
 The project includes comprehensive tests for:
 - Components (`src/components/**/*.test.tsx`)
-- API functions (`src/api/pokeapi.test.ts`)
-- Utilities and helpers
+- Pages (`src/pages/**/*.test.tsx`)
+- Services (`src/services/pokeapi.test.ts`)
+- Utilities (`src/utils/**/*.test.ts`)
 
 ## Project Structure
 
 ```
 src/
-├── constants/          # Global constants and configurations
-├── services/           # API layer and data fetching
-├── components/         # Reusable UI components
-│   ├── common/        # Common components (Button, Input, etc.)
-│   └── feature/       # Feature-specific components
-├── pages/             # Page components
-├── types/             # TypeScript type definitions
-├── stories/           # Storybook stories
-└── assets/            # Static assets
+├── assets/            # Static assets (images, icons)
+├── components/        # Reusable UI components
+│   ├── common/       # Common components (Button, Input, Chip, Tabs)
+│   └── feature/      # Feature-specific components (Header, Loading, etc.)
+├── constants/         # Global constants and configurations
+├── pages/            # Page components (Search, Pokemon, Error404, etc.)
+├── services/         # API layer and data fetching
+├── stories/          # Storybook stories for components
+├── types/            # TypeScript type definitions
+└── utils/            # Utility functions and helpers
 ```
 
 ### Constants Organization

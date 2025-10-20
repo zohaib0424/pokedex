@@ -5,10 +5,7 @@ import './index.css'
 import App from './App'
 
 const rootElement = document.getElementById('root')
-if (!rootElement) {
-  throw new Error('Root element with id "root" not found')
-}
-
+if (!rootElement) throw new Error('Root element with id "root" not found')
 const queryClient = new QueryClient()
 
 createRoot(rootElement).render(
