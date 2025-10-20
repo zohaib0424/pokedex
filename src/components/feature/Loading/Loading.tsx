@@ -1,5 +1,5 @@
 import React from "react";
-import { Header } from "components/feature/Header";
+import { Header } from "@/components/feature/Header";
 
 interface LoadingProps {
   onBackClick?: () => void;

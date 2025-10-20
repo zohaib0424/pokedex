@@ -29,7 +29,8 @@ describe("Button Component", () => {
     render(<Button onClick={mockOnClick}>Primary Button</Button>);
 
     const button = screen.getByText("Primary Button");
-    expect(button).toHaveStyle("background: #ff6b6b");
+    expect(button).toHaveClass("bg-[#fe5858]");
+    expect(button).toHaveClass("text-white");
   });
 
   it("renders with secondary variant", () => {
@@ -40,7 +41,8 @@ describe("Button Component", () => {
     );
 
     const button = screen.getByText("Secondary Button");
-    expect(button).toHaveStyle("background: #ffd2d2");
+    expect(button).toHaveClass("bg-[#ffd2d2]");
+    expect(button).toHaveClass("text-[#8a3a3a]");
   });
 
   it("applies custom className", () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { HeaderProps } from "./Header.type";
 import { BackIcon } from "@/assets/SvgComponents";
-import { Button } from "components/common/Button";
+import { Button } from "@/components/common/Button";
 
 export const Header: React.FC<HeaderProps> = ({
   backgroundColor = "#7AC74C",

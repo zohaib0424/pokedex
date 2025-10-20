@@ -1,6 +1,6 @@
 import React from "react";
 import NoPokemonIcon from "@/assets/NoPokemonScreenIcon.png";
-import { Header } from "components/feature/Header";
+import { Header } from "@/components/feature/Header";
 
 interface PokemonNotFoundProps {
   onBackClick: () => void;

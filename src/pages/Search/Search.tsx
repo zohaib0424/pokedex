@@ -7,8 +7,8 @@ import {
   isValidSearchQuery,
 } from "./Search.utils";
 import pokemonBg from "@/assets/PokemonBg.png";
-import { Input } from "components/common/Input";
-import { Button } from "components/common/Button";
+import { Input } from "@/components/common/Input";
+import { Button } from "@/components/common/Button";
 
 export const Search = () => {
   const [query, setQuery] = useState("");

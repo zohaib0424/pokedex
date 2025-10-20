@@ -1,8 +1,8 @@
 import React from "react";
 import { PokedexCardProps, TabType } from "./PokedexCard.type";
-import { Chip } from "components/common/Chip";
-import { Tabs } from "components/common/Tabs";
-import { Header } from "components/feature/Header";
+import { Chip } from "@/components/common/Chip";
+import { Tabs } from "@/components/common/Tabs";
+import { Header } from "@/components/feature/Header";
 
 const tabs = [TabType.STATS, TabType.EVOLUTIONS, TabType.MOVES] as const;
 export const PokedexCard: React.FC<PokedexCardProps> = ({

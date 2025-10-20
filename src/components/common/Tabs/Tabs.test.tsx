@@ -22,7 +22,8 @@ describe("Tabs Component", () => {
     render(<Tabs tabs={mockTabs} backgroundColor="#7AC74C" />);
 
     const statsTab = screen.getByText("STATS");
-    expect(statsTab).toHaveStyle({ backgroundColor: "#7AC74C", color: "white" });
+    expect(statsTab).toHaveAttribute("style", expect.stringContaining("background-color: rgb(122, 199, 76)"));
+    expect(statsTab).toHaveAttribute("style", expect.stringContaining("color: white"));
   });
 
   it("renders with specified default tab", () => {
@@ -31,10 +32,8 @@ describe("Tabs Component", () => {
     );
 
     const evolutionsTab = screen.getByText("EVOLUTIONS");
-    expect(evolutionsTab).toHaveStyle({
-      backgroundColor: "#FF5733",
-      color: "white",
-    });
+    expect(evolutionsTab).toHaveAttribute("style", expect.stringContaining("background-color: rgb(255, 87, 51)"));
+    expect(evolutionsTab).toHaveAttribute("style", expect.stringContaining("color: white"));
   });
 
   it("calls onTabChange when tab is clicked (uncontrolled)", () => {
@@ -53,7 +52,8 @@ describe("Tabs Component", () => {
     const movesTab = screen.getByText("MOVES");
     fireEvent.click(movesTab);
 
-    expect(movesTab).toHaveStyle({ backgroundColor: "#7AC74C", color: "white" });
+    expect(movesTab).toHaveAttribute("style", expect.stringContaining("background-color: rgb(122, 199, 76)"));
+    expect(movesTab).toHaveAttribute("style", expect.stringContaining("color: white"));
   });
 
   it("works as controlled component with activeTab prop", () => {
@@ -67,7 +67,8 @@ describe("Tabs Component", () => {
     );
 
     const statsTab = screen.getByText("STATS");
-    expect(statsTab).toHaveStyle({ backgroundColor: "#7AC74C", color: "white" });
+    expect(statsTab).toHaveAttribute("style", expect.stringContaining("background-color: rgb(122, 199, 76)"));
+    expect(statsTab).toHaveAttribute("style", expect.stringContaining("color: white"));
 
     // Click on another tab
     const evolutionsTab = screen.getByText("EVOLUTIONS");
@@ -86,10 +87,8 @@ describe("Tabs Component", () => {
       />
     );
 
-    expect(evolutionsTab).toHaveStyle({
-      backgroundColor: "#7AC74C",
-      color: "white",
-    });
+    expect(evolutionsTab).toHaveAttribute("style", expect.stringContaining("background-color: rgb(122, 199, 76)"));
+    expect(evolutionsTab).toHaveAttribute("style", expect.stringContaining("color: white"));
   });
 
   it("applies custom className", () => {
@@ -112,14 +111,10 @@ describe("Tabs Component", () => {
     const evolutionsTab = screen.getByText("EVOLUTIONS");
     const movesTab = screen.getByText("MOVES");
 
-    expect(evolutionsTab).toHaveStyle({
-      backgroundColor: "transparent",
-      color: "#7AC74C",
-    });
-    expect(movesTab).toHaveStyle({
-      backgroundColor: "transparent",
-      color: "#7AC74C",
-    });
+    expect(evolutionsTab).toHaveAttribute("style", expect.stringContaining("background-color: transparent"));
+    expect(evolutionsTab).toHaveAttribute("style", expect.stringContaining("color: rgb(122, 199, 76)"));
+    expect(movesTab).toHaveAttribute("style", expect.stringContaining("background-color: transparent"));
+    expect(movesTab).toHaveAttribute("style", expect.stringContaining("color: rgb(122, 199, 76)"));
   });
 
   it("uses custom backgroundColor for active tab", () => {
@@ -127,10 +122,8 @@ describe("Tabs Component", () => {
     render(<Tabs tabs={mockTabs} backgroundColor={customColor} />);
 
     const statsTab = screen.getByText("STATS");
-    expect(statsTab).toHaveStyle({
-      backgroundColor: customColor,
-      color: "white",
-    });
+    expect(statsTab).toHaveAttribute("style", expect.stringContaining("background-color: rgb(255, 87, 51)"));
+    expect(statsTab).toHaveAttribute("style", expect.stringContaining("color: white"));
   });
 });
 

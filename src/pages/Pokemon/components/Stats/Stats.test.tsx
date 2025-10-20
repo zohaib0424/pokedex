@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { Stats } from "./Stats";
-import * as chartUtils from "../../../../utils/chart";
+import * as chartUtils from "../../../../components/feature/Charts/BarChart/BarChart.utils";
 import { BarChartProps } from "../../../../components/feature/Charts/BarChart/BarChart.type";
 
 // Mock the BarChart component
@@ -72,9 +72,12 @@ describe("Stats Component", () => {
   it("renders stat values with zero padding", () => {
     render(<Stats stats={mockStats} color={mockColor} />);
 
-    expect(screen.getByText("045")).toBeInTheDocument(); // HP
-    expect(screen.getByText("049")).toBeInTheDocument(); // Attack
-    expect(screen.getByText("065")).toBeInTheDocument(); // Special Attack
+    const values045 = screen.getAllByText("045"); // HP and Speed both have 45
+    expect(values045.length).toBeGreaterThanOrEqual(2);
+    const values049 = screen.getAllByText("049"); // Attack and Defense both have 49
+    expect(values049.length).toBeGreaterThanOrEqual(2);
+    const values065 = screen.getAllByText("065"); // Special Attack and Special Defense both have 65
+    expect(values065.length).toBeGreaterThanOrEqual(2);
   });
 
   it("handles single stat", () => {

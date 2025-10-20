@@ -95,7 +95,7 @@ describe("Moves Component", () => {
     const { container } = render(<Moves moves={mockMoves} color={mockColor} />);
 
     const movesContainer = container.firstChild as HTMLElement;
-    expect(movesContainer).toHaveClass("max-h-[300px]");
+    expect(movesContainer).toHaveClass("max-h-[calc(100vh-732px)]");
   });
 
   it("renders with flex column layout", () => {
@@ -157,10 +157,10 @@ describe("Moves Component", () => {
   it("renders empty state with centered text", () => {
     render(<Moves moves={[]} color={mockColor} />);
 
-    const emptyState = screen.getByText("No moves available").closest("div");
-    expect(emptyState).toHaveClass("flex");
-    expect(emptyState).toHaveClass("items-center");
-    expect(emptyState).toHaveClass("justify-center");
+    const emptyState = screen.getByText("No moves available");
+    expect(emptyState).toHaveClass("text-gray-600");
+    const parentContainer = emptyState.closest("div")?.parentElement;
+    expect(parentContainer).toHaveClass("text-center");
   });
 
   it("renders empty state text with correct styling", () => {

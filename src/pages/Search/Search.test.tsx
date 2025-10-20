@@ -199,8 +199,9 @@ describe("Search Page", () => {
   it("renders with background image", () => {
     const { container } = renderSearch();
 
-    const mainDiv = container.querySelector('[style*="backgroundImage"]');
+    const mainDiv = container.querySelector('.relative.overflow-hidden');
     expect(mainDiv).toBeInTheDocument();
+    expect(mainDiv).toHaveClass('bg-cover');
   });
 
   it("renders with correct layout classes", () => {

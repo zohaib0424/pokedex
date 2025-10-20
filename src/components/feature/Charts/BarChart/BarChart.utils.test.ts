@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { getStatAbbreviation, parseStatsForChart } from "./chart";
-import { Stat } from "../pages/Pokemon/components/Stats/Stats.type";
+import { getStatAbbreviation, parseStatsForChart } from "./BarChart.utils";
+import { Stat } from "@/pages/Pokemon/components/Stats/Stats.type";
 
-describe("chart.utils", () => {
+describe("BarChart.utils", () => {
   describe("getStatAbbreviation", () => {
     it("converts 'hp' to 'HP'", () => {
       expect(getStatAbbreviation("hp")).toBe("HP");
@@ -127,3 +127,4 @@ describe("chart.utils", () => {
     });
   });
 });
+
