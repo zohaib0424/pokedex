@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { TypeBadge } from "../../components/common/TypeBadge";
+import { Chip } from "../../components/common/Chip";
 import { PokemonTypeName } from "../../types/pokemon";
 
 const meta = {
-  title: "Components/Common/TypeBadge",
-  component: TypeBadge,
+  title: "Components/Chip",
+  component: Chip,
   parameters: {
     layout: "centered",
   },
@@ -35,7 +35,7 @@ const meta = {
       description: "Pokemon type",
     },
   },
-} satisfies Meta<typeof TypeBadge>;
+} satisfies Meta<typeof Chip>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -46,109 +46,8 @@ export const Normal: Story = {
   },
 };
 
-export const Fire: Story = {
-  args: {
-    type: "fire",
-  },
-};
-
-export const Water: Story = {
-  args: {
-    type: "water",
-  },
-};
-
-export const Electric: Story = {
-  args: {
-    type: "electric",
-  },
-};
-
-export const Grass: Story = {
-  args: {
-    type: "grass",
-  },
-};
-
-export const Ice: Story = {
-  args: {
-    type: "ice",
-  },
-};
-
-export const Fighting: Story = {
-  args: {
-    type: "fighting",
-  },
-};
-
-export const Poison: Story = {
-  args: {
-    type: "poison",
-  },
-};
-
-export const Ground: Story = {
-  args: {
-    type: "ground",
-  },
-};
-
-export const Flying: Story = {
-  args: {
-    type: "flying",
-  },
-};
-
-export const Psychic: Story = {
-  args: {
-    type: "psychic",
-  },
-};
-
-export const Bug: Story = {
-  args: {
-    type: "bug",
-  },
-};
-
-export const Rock: Story = {
-  args: {
-    type: "rock",
-  },
-};
-
-export const Ghost: Story = {
-  args: {
-    type: "ghost",
-  },
-};
-
-export const Dragon: Story = {
-  args: {
-    type: "dragon",
-  },
-};
-
-export const Dark: Story = {
-  args: {
-    type: "dark",
-  },
-};
-
-export const Street: Story = {
-  args: {
-    type: "street",
-  },
-};
-
-export const Fairy: Story = {
-  args: {
-    type: "fairy",
-  },
-};
-
 export const AllTypes: Story = {
+  args: { type: "normal" },
   render: () => {
     const allTypes: PokemonTypeName[] = [
       "normal",
@@ -181,7 +80,7 @@ export const AllTypes: Story = {
         }}
       >
         {allTypes.map((type) => (
-          <TypeBadge key={type} type={type} />
+          <Chip key={type} type={type} />
         ))}
       </div>
     );
@@ -189,6 +88,7 @@ export const AllTypes: Story = {
 };
 
 export const PopularTypes: Story = {
+  args: { type: "fire" },
   render: () => (
     <div
       style={{
@@ -198,15 +98,16 @@ export const PopularTypes: Story = {
         alignItems: "center",
       }}
     >
-      <TypeBadge type="fire" />
-      <TypeBadge type="water" />
-      <TypeBadge type="grass" />
-      <TypeBadge type="electric" />
+      <Chip type="fire" />
+      <Chip type="water" />
+      <Chip type="grass" />
+      <Chip type="electric" />
     </div>
   ),
 };
 
 export const DualTypes: Story = {
+  args: { type: "fire" },
   render: () => (
     <div
       style={{
@@ -216,8 +117,9 @@ export const DualTypes: Story = {
         justifyContent: "center",
       }}
     >
-      <TypeBadge type="fire" />
-      <TypeBadge type="flying" />
+      <Chip type="fire" />
+      <Chip type="flying" />
     </div>
   ),
 };
+

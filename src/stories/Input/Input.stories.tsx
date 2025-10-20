@@ -3,7 +3,7 @@ import { fn } from "storybook/test";
 import { Input } from "../../components/common/Input";
 
 const meta: Meta<typeof Input> = {
-  title: "Components/Common/Input",
+  title: "Components/Input",
   component: Input,
   parameters: {
     layout: "centered",

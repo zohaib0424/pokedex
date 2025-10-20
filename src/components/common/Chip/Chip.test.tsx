@@ -1,108 +1,108 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
-import { TypeBadge } from "./TypeBadge";
+import { Chip } from "./Chip";
 import { getPokemonTypeColor } from "@/constants";
 
 vi.mock("@/constants", () => ({
   getPokemonTypeColor: vi.fn(),
 }));
 
-describe("TypeBadge Component", () => {
+describe("Chip Component", () => {
   it("renders with correct type name", () => {
     vi.mocked(getPokemonTypeColor).mockReturnValue("#EE8130");
-    render(<TypeBadge type="fire" />);
+    render(<Chip type="fire" />);
 
-    const badge = screen.getByText("fire");
-    expect(badge).toBeInTheDocument();
+    const chip = screen.getByText("fire");
+    expect(chip).toBeInTheDocument();
   });
 
   it("applies correct background color for fire type", () => {
     vi.mocked(getPokemonTypeColor).mockReturnValue("#EE8130");
-    render(<TypeBadge type="fire" />);
+    render(<Chip type="fire" />);
 
-    const badge = screen.getByText("fire");
-    expect(badge).toHaveStyle({ backgroundColor: "#EE8130" });
+    const chip = screen.getByText("fire");
+    expect(chip).toHaveStyle({ backgroundColor: "#EE8130" });
   });
 
   it("applies correct background color for water type", () => {
     vi.mocked(getPokemonTypeColor).mockReturnValue("#6390F0");
-    render(<TypeBadge type="water" />);
+    render(<Chip type="water" />);
 
-    const badge = screen.getByText("water");
-    expect(badge).toHaveStyle({ backgroundColor: "#6390F0" });
+    const chip = screen.getByText("water");
+    expect(chip).toHaveStyle({ backgroundColor: "#6390F0" });
   });
 
   it("applies correct background color for grass type", () => {
     vi.mocked(getPokemonTypeColor).mockReturnValue("#7AC74C");
-    render(<TypeBadge type="grass" />);
+    render(<Chip type="grass" />);
 
-    const badge = screen.getByText("grass");
-    expect(badge).toHaveStyle({ backgroundColor: "#7AC74C" });
+    const chip = screen.getByText("grass");
+    expect(chip).toHaveStyle({ backgroundColor: "#7AC74C" });
   });
 
   it("applies correct background color for electric type", () => {
     vi.mocked(getPokemonTypeColor).mockReturnValue("#F7D02C");
-    render(<TypeBadge type="electric" />);
+    render(<Chip type="electric" />);
 
-    const badge = screen.getByText("electric");
-    expect(badge).toHaveStyle({ backgroundColor: "#F7D02C" });
+    const chip = screen.getByText("electric");
+    expect(chip).toHaveStyle({ backgroundColor: "#F7D02C" });
   });
 
   it("renders text in uppercase", () => {
     vi.mocked(getPokemonTypeColor).mockReturnValue("#EE8130");
-    render(<TypeBadge type="fire" />);
+    render(<Chip type="fire" />);
 
-    const badge = screen.getByText("fire");
-    expect(badge).toHaveClass("uppercase");
+    const chip = screen.getByText("fire");
+    expect(chip).toHaveClass("uppercase");
   });
 
   it("renders with white text color", () => {
     vi.mocked(getPokemonTypeColor).mockReturnValue("#EE8130");
-    render(<TypeBadge type="fire" />);
+    render(<Chip type="fire" />);
 
-    const badge = screen.getByText("fire");
-    expect(badge).toHaveClass("text-white");
+    const chip = screen.getByText("fire");
+    expect(chip).toHaveClass("text-white");
   });
 
   it("calls getPokemonTypeColor with correct type", () => {
     vi.mocked(getPokemonTypeColor).mockReturnValue("#A33EA1");
-    render(<TypeBadge type="poison" />);
+    render(<Chip type="poison" />);
 
     expect(getPokemonTypeColor).toHaveBeenCalledWith("poison");
   });
 
   it("renders as a span element", () => {
     vi.mocked(getPokemonTypeColor).mockReturnValue("#EE8130");
-    const { container } = render(<TypeBadge type="fire" />);
+    const { container } = render(<Chip type="fire" />);
 
-    const badge = container.querySelector("span");
-    expect(badge).toBeInTheDocument();
+    const chip = container.querySelector("span");
+    expect(chip).toBeInTheDocument();
   });
 
   it("renders with rounded pill shape", () => {
     vi.mocked(getPokemonTypeColor).mockReturnValue("#EE8130");
-    render(<TypeBadge type="fire" />);
+    render(<Chip type="fire" />);
 
-    const badge = screen.getByText("fire");
-    expect(badge).toHaveClass("rounded-full");
+    const chip = screen.getByText("fire");
+    expect(chip).toHaveClass("rounded-full");
   });
 
   it("handles dragon type correctly", () => {
     vi.mocked(getPokemonTypeColor).mockReturnValue("#6F35FC");
-    render(<TypeBadge type="dragon" />);
+    render(<Chip type="dragon" />);
 
-    const badge = screen.getByText("dragon");
-    expect(badge).toBeInTheDocument();
-    expect(badge).toHaveStyle({ backgroundColor: "#6F35FC" });
+    const chip = screen.getByText("dragon");
+    expect(chip).toBeInTheDocument();
+    expect(chip).toHaveStyle({ backgroundColor: "#6F35FC" });
   });
 
   it("handles fairy type correctly", () => {
     vi.mocked(getPokemonTypeColor).mockReturnValue("#D685AD");
-    render(<TypeBadge type="fairy" />);
+    render(<Chip type="fairy" />);
 
-    const badge = screen.getByText("fairy");
-    expect(badge).toBeInTheDocument();
-    expect(badge).toHaveStyle({ backgroundColor: "#D685AD" });
+    const chip = screen.getByText("fairy");
+    expect(chip).toBeInTheDocument();
+    expect(chip).toHaveStyle({ backgroundColor: "#D685AD" });
   });
 });
 

@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { PokedexCard } from "./PokedexCard";
+import { TabType } from "./PokedexCard.type";
 import type { PokemonTypeName } from "@/types/pokemon";
 
 describe("PokedexCard Component", () => {
@@ -171,7 +172,7 @@ describe("PokedexCard Component", () => {
     expect(pokemonName).toHaveClass("capitalize");
   });
 
-  it("renders TypeBadge for each type", () => {
+  it("renders Chip for each type", () => {
     const multiTypePokemon = {
       ...mockPokemonData,
       pokemonTypes: ["water", "flying"] as PokemonTypeName[],
@@ -218,7 +219,7 @@ describe("PokedexCard Component", () => {
 
   it("applies correct active tab from props", () => {
     render(
-      <PokedexCard {...mockPokemonData} activeTab="MOVES">
+      <PokedexCard {...mockPokemonData} activeTab={TabType.MOVES} onTabChange={mockOnTabChange}>
         {mockChildren}
       </PokedexCard>
     );

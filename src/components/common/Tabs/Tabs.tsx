@@ -6,12 +6,13 @@ import { Button } from "../Button";
 export const Tabs = <T extends string = string>({
   tabs,
   activeTab: controlledActiveTab,
+  defaultTab,
   onTabChange,
   backgroundColor = "#7AC74C",
   className,
   "data-testid": testId,
 }: TabsProps<T>) => {
-  const [internalActiveTab, setInternalActiveTab] = useState<T>(tabs[0]);
+  const [internalActiveTab, setInternalActiveTab] = useState<T>(defaultTab ?? tabs[0]);
 
   const isControlled = controlledActiveTab !== undefined;
   const activeTab = isControlled ? controlledActiveTab : internalActiveTab;

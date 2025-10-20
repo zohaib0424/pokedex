@@ -1,6 +1,6 @@
 import React from "react";
 import { PokedexCardProps, TabType } from "./PokedexCard.type";
-import { TypeBadge } from "components/common/TypeBadge";
+import { Chip } from "components/common/Chip";
 import { Tabs } from "components/common/Tabs";
 import { Header } from "components/feature/Header";
 
@@ -41,7 +41,7 @@ export const PokedexCard: React.FC<PokedexCardProps> = ({
 
           <div className="flex gap-3 sm:gap-6 md:gap-10 lg:gap-16 justify-center mb-4 sm:mb-5 flex-wrap">
             {pokemonTypes.map((type) => (
-              <TypeBadge key={type} type={type} />
+              <Chip key={type} type={type} />
             ))}
           </div>
 

@@ -7,8 +7,8 @@ export type { InputProps } from "./common/Input";
 export { Tabs } from "./common/Tabs";
 export type { TabsProps } from "./common/Tabs";
 
-export { TypeBadge } from "./common/TypeBadge";
-export type { TypeBadgeProps } from "./common/TypeBadge";
+export { Chip } from "./common/Chip";
+export type { ChipProps } from "./common/Chip";
 
 export { Header } from "./feature/Header";
 export type { HeaderProps } from "./feature/Header";

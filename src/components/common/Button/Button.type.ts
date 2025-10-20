@@ -2,7 +2,7 @@ export type ButtonVariant = 'primary' | 'secondary' | 'icon';
 
 export interface ButtonProps {
   children: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   variant?: ButtonVariant;
   className?: string;
   disabled?: boolean;

@@ -3,7 +3,7 @@ import { Tabs } from "../../components/common/Tabs";
 import { useState } from "react";
 
 const meta = {
-  title: "Components/Common/Tabs",
+  title: "Components/Tabs",
   component: Tabs,
   parameters: {
     layout: "centered",
@@ -95,35 +95,6 @@ export const Controlled: Story = {
   args: {
     tabs: ["STATS", "EVOLUTIONS", "MOVES"] as const,
     backgroundColor: "#7AC74C",
-  },
-};
-
-// Different Pokemon Types
-export const PokemonTypes: Story = {
-  args: {
-    tabs: ["Grass", "Fire", "Water", "Electric"] as const,
-    backgroundColor: "#4CAF50",
-  },
-};
-
-export const ElectricType: Story = {
-  args: {
-    tabs: ["STATS", "EVOLUTIONS", "MOVES"] as const,
-    backgroundColor: "#F7D02C",
-  },
-};
-
-export const FireType: Story = {
-  args: {
-    tabs: ["STATS", "EVOLUTIONS", "MOVES"] as const,
-    backgroundColor: "#FD7D24",
-  },
-};
-
-export const WaterType: Story = {
-  args: {
-    tabs: ["STATS", "EVOLUTIONS", "MOVES"] as const,
-    backgroundColor: "#4592C4",
   },
 };
 
